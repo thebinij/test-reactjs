@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { MdLogin } from "react-icons/md";
 
 const NavBar = ({ user }: any) => {
+  console.log
   const styles =
     "flex py-2 pl-3 pr-4 items-center gap-1 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0";
   return (
@@ -21,14 +23,21 @@ const NavBar = ({ user }: any) => {
           >
             <Link to="/">Home</Link>
           </li>
-          <li className={styles}>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
+          {user && (
+            <li className={styles}>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+          )}
           <li className={styles}>
             {user && Object.keys(user).length > 0 ? (
               <Link to="/profile">Hello, {user.full_name.split(" ")[0]}</Link>
             ) : (
-              <Link to="/login">Login</Link>
+              <Link to="/login">
+                <div className="flex gap-1 justify-center items-center">
+                  <span>Login</span>
+                  <MdLogin />
+                </div>
+              </Link>
             )}
           </li>
         </ul>

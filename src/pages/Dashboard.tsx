@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getData } from "../utils/actions";
 import { Data } from "../utils/types";
 
 export default function Dashboard({ user }: any) {
+  console.log(user)
   const [data, setData] = useState<Data[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(user)
     if (user) {
       const token = user.jwt_token;
 
@@ -18,11 +21,11 @@ export default function Dashboard({ user }: any) {
         console.log(data);
       })();
     }
+    else{
+      navigate("/");
+    }
   }, []);
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
   return (
     <div className="relative overflow-x-auto p-4">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
