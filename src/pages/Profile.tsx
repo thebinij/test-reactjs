@@ -7,7 +7,7 @@ export default function Profile({ user, setUser }: any) {
   function handleLogout() {
     localStorage.removeItem("userCredentials");
     setUser(undefined);
-    toast("Logout Success!")
+    toast("Logout Success!");
     navigate("/landing");
   }
   if (!user) {

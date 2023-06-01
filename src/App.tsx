@@ -45,7 +45,7 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute user={user}>
-              <Dashboard user={user}  />
+              <Dashboard user={user} />
             </ProtectedRoute>
           }
         />
@@ -58,7 +58,10 @@ function App() {
           }
         />
 
-        <Route path="/login" element={<Login user={user} setUser={setUser} />} />
+        <Route
+          path="/login"
+          element={<Login user={user} setUser={setUser} />}
+        />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </>

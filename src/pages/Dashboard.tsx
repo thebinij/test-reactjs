@@ -4,12 +4,12 @@ import { getData } from "../utils/actions";
 import { Data } from "../utils/types";
 
 export default function Dashboard({ user }: any) {
-  console.log(user)
+  console.log(user);
   const [data, setData] = useState<Data[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user)
+    console.log(user);
     if (user) {
       const token = user.jwt_token;
 
@@ -20,8 +20,7 @@ export default function Dashboard({ user }: any) {
         }
         console.log(data);
       })();
-    }
-    else{
+    } else {
       navigate("/");
     }
   }, []);
@@ -68,6 +67,5 @@ export default function Dashboard({ user }: any) {
         </tbody>
       </table>
     </div>
-
   );
 }

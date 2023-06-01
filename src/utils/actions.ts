@@ -6,7 +6,7 @@ export const loginRequest = async (
   ip_address: string
 ): Promise<any> => {
   const body = JSON.stringify({ login_id, login_password, ip_address });
-console.log(login_id,login_password,ip_address)
+  console.log(login_id, login_password, ip_address);
   return await fetch(`${API}/config/v1/auths/login`, {
     method: "POST",
     headers: {

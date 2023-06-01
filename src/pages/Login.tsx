@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { loginRequest } from "../utils/actions";
 import { IP_ADDRESS } from "../utils/constants";
-import { Navigate, useNavigate, } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export default function Login({ user,setUser }: any) {
+export default function Login({ user, setUser }: any) {
   const [loginID, setLoginID] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -13,17 +13,16 @@ export default function Login({ user,setUser }: any) {
   async function submitForm() {
     setLoading(true);
     const res = await loginRequest(loginID, password, IP_ADDRESS);
-    
+
     if (res.success) {
-      const newUser = res.data[0]
+      const newUser = res.data[0];
       // Add the token to local storage
       localStorage.setItem("userCredentials", JSON.stringify(newUser));
-      toast("Success Login")
-      setUser(newUser)
-      navigate('/dashboard')
-    }
-    else{
-      toast("Something went wrong!")
+      toast("Success Login");
+      setUser(newUser);
+      navigate("/dashboard");
+    } else {
+      toast("Something went wrong!");
     }
     setLoading(false);
   }

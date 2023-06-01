@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { MdLogin } from "react-icons/md";
 
 const NavBar = ({ user }: any) => {
-  console.log
+  console.log;
   const styles =
     "flex py-2 pl-3 pr-4 items-center gap-1 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0";
   return (
