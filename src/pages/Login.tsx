@@ -1,19 +1,31 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { loginRequest } from "../utils/actions";
 import { IP_ADDRESS } from "../utils/constants";
+import { Navigate } from "react-router";
 
-
-export default function Login() {
+export default function Login({user}:any) {
   const [loginID, setLoginID] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading]= useState<boolean>(false);
 
   async function submitForm() {
+    setLoading(true)
     const res = await loginRequest(loginID, password, IP_ADDRESS);
-    console.log(res);
+    if (res.success) {
+      // dispatch({ type: "LOGIN", payload: "" });
+      // Add the token to local storage
+      localStorage.setItem("userCredentials", JSON.stringify(res.data[0]));
+
+    }
+    setLoading(false)
+  }
+
+  if (user) {
+    return <Navigate to="/dashboard" replace />;
   }
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+
+      <div className="flex flex-col items-center justify-center mx-auto md:h-screen">
         <a
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
@@ -92,6 +104,7 @@ export default function Login() {
                 type="button"
                 className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 onClick={submitForm}
+                disabled={loading}
               >
                 {" "}
                 Sign in
@@ -109,6 +122,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-    </section>
+
   );
 }
